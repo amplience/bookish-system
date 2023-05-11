@@ -1,0 +1,20 @@
+{
+  "name": "amplience-devops-interview-test",
+  "version": "0.0.1",
+  "description": "Amplience DevOps Interview app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amplience/amplience-devops-interview-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amplience/amplience-devops-interview-test/issues"
+  },
+  "homepage": "https://github.com/amplience/amplience-devops-interview-test#readme"
+}
