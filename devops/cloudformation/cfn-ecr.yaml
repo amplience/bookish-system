@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: ECR Resource
+
+Parameters:
+  ECSClusterName:
+    Type: String
+    Description: The name of the ECS cluster to create.
+    Default: AmplienceECS
+
+  ECRRepositoryName:
+    Type: String
+    Description: The name of the ECR repository to create.
+    Default: ecramplience
+
+  MyAWSAccount:
+    Type: String
+    Default: 224674423298
+
+Resources:
+  ECRRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Ref ECRRepositoryName
+
+Outputs:
+  ECRRepositoryArn:
+    Value: !GetAtt ECRRepository.Arn
+    Description: The ARN of the ECR repository.

@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: roles and policies
+
+Resources:
+  TaskExecutionRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: 'EcsTaskExecutionRole'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service: 'ecs-tasks.amazonaws.com'
+            Action: 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: 'ecs-tasks'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: 'Allow'
+                Action:
+                  - 'ecr:GetAuthorizationToken'
+                  - 'ecr:BatchCheckLayerAvailability'
+                  - 'ecr:GetDownloadUrlForLayer'
+                  - 'ecr:BatchGetImage'
+                Resource: '*'
+              - Effect: 'Allow'
+                Action:
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource:
+                  - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/ecs/*:*:*'
+                  - 'arn:aws:logs:eu-west-2:224674423298:log-group:apis:log-stream:*/*/*'
+
+Outputs:
+
+  ECSTaskExecutionRole:
+    Description: ECS Task Execution Role
+    Value: !GetAtt 'TaskExecutionRole.Arn'
+    Export:
+      Name: 'ECSTaskExecutionRole'
